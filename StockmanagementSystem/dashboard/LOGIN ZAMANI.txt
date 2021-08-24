@@ -1,0 +1,70 @@
+<?php
+//stored function
+session_start();
+
+include ('dbconnect/connection.php');
+if ($_SERVER['REQUEST_METHOD']=='POST')
+{
+
+    $firstname= $_POST ['username'];
+    $password= $_POST ['password'];
+
+ $query="select username,password,role from user where username='".$_POST ['username']."'and passwrd='".$_POST ['password']."'and role='USER'";
+ 
+ 
+ if( $query="select role from user where role='user'")
+
+{
+
+ $result=mysqli_query($conn,$query);
+if(mysqli_fetch_assoc($result))
+
+{
+//if data matches create session
+$_SESSION ['username']=$_POST ['username'];
+header("location:user/index.php");
+}
+else
+{
+    header("location:index.php?invalid=incorrect username or password");
+}
+}
+
+
+else if( $query="select role from user where role='admin'")
+
+{
+
+ $result=mysqli_query($conn,$query);
+if(mysqli_fetch_assoc($result))
+
+{
+//if data matches create session
+$_SESSION ['username']=$_POST ['username'];
+header("location:dashboard/index.php");
+}
+else
+{
+    header("location:index.php?invalid=incorrect username or password");
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+?>
+
+
+
+
