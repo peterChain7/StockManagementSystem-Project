@@ -1,4 +1,3 @@
-
 <?php session_start(); ?>
 <!DOCTYPE html>
 <head>
@@ -8,33 +7,16 @@
 <link rel="stylesheet" href="css/tables/main.css">    
 </head>
 <body>
-<!--the main div that holds all entire divisions, closed at the buttom-->
+<!--div kuu-->
 <div id="main-div">
-<!--footer  this is system logo, logout-->
-<div id="footer">
-<?php
-if(isset($_SESSION['username']))
-{
-     
-    echo $_SESSION['username'];
-    echo '<a href="logout.php?logout">logout</a>';
-}
-else
-{
-    header('location:../index.php');
-}
-?>
-</div>
-<!--footer system logo ends-->
-<!--top div for notification for all errors-->
+<!--top div for notification-->
 <div id="top-div">
 </div>
 <!--top div for notification ends here-->
-<!--web contents here,  its content division-->
+<!--contents here-->
 <div id="contents">
 <table class="homestatus">
 <?php 
-
 //this php script responsible for searching data from database to send to android
 //and when you run this script alone, will display data on browser
 	require_once('dbconnect/connection.php');
@@ -47,12 +29,11 @@ else
 	$stmt->bind_result($username,$productid,$pricepurchased,$salesprice,$profit,$userearnings);
 	$contents = array(); 
 	while($stmt->fetch())
-	
-    //smt to fetch given rows using array
+	//smt to fetch given rows using array
     //sequence order is matter  as you declare in query
-    
-	{
+    {
 		$temp = array();
+        
         $temp['username']=$username;
         $temp['productid']=$productid;
         $temp['pricepurchased']=$pricepurchased;
@@ -68,7 +49,7 @@ else
          "<tr><td><H4><img src='images/totalitems.png'>Transactions: ".$username."</h4></td></tr>".
         "<tr><td><H4><img src='images/salesprice.png'>Total items: ".$productid."</h4></td></tr>".
 		"<tr><td><H4><img src='images/salesprice.png'>Total sales ".$salesprice."/=</h4></td></tr>".
-		"<tr><td><H4><img src='images/profit.png'>Item cost: ".$pricepurchased."/=</h4></td></tr>".
+		"<tr><td><H4><img src='images/profit.png'>Ttem cost: ".$pricepurchased."/=</h4></td></tr>".
 		"<tr><td><H4><img src='images/profit.png'>Profit: ".$profit."/=</h4></td></tr>".
 		"<tr><td><H4><img src='images/profit.png'>User earnings: ".$userearnings."/=</h4></td></tr>
 		</table>";
@@ -76,33 +57,43 @@ else
 	}
 	
 ?>
-
 </div>
-
-<!--contents of the web ends here /contents div-->
-<!--main div left side heigheted starts here-- -->
+<!--contents ends here-->
 <!--main div left side heigheted -->
 <div id="leftdiv-main">
-<!--small div inside main left div starts here----------------------->
+<!--ndogo zake zinaanza hapa-->
 <div id="leftsmall-first">
 <ul class="add-product" id="zoom">
-        
-        <li><a href="adduser.php"> Add user</a></li>
-        <li><a href="removeuser.php"> Remove user</a></li>
-        <li><a href="updateuser.php"> update user</a></li>
-        </ul>
-        
-        </div>
-
+         <li><a href="removeproduct.php">remove product</a></li>
+        <li><a href="addproduct.php">add product</a></li>
+        <li><a href="stockstatus.php">sales statistics</a></li>
+        <li><a href="productprices.php">product prices</a></li>
+        <li><a href="salesinfo.php"> salesinfo</a></li>  
+        <li><a href="generalreport.php"> general report</a></li>  
+       </div>
+<!--<div id="leftsmall-second">
+  </div>-->
 <!--ndogo zake zinaisha hapa-->
 <!--main div left side heigheted ends here -->
 </div>
-
 <!--footer-->
-
+<div id="footer">
+    <?php
+if(isset($_SESSION['username']))
+    {
+        echo $_SESSION['username'];
+        echo '<a href="logout.php?logout">logout</a>';
+        
+    }
+    else
+    {
+        header("location:../index.php");
+    }
+    
+    ?>
+</div>
 <!--footer ends-->
 <!--div kuu imefungwa-->
 </div>
 </body>
 </html>
-<!----------------------------------------------END--------------------------->
